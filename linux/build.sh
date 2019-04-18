@@ -174,6 +174,11 @@ function kernel_patch() {
     if [ $? -ne 0 ]; then
         k_patch patches/cve_security.patch
     fi
+    # patch cve_security.patch
+    grep USB_USBCAN_LIGHT_2HS_PRODUCT_ID drivers/net/can/usb/kvaser_usb.c > /dev/null
+    if [ $? -ne 0 ]; then
+        k_patch patches/Update-Kvaser-CAN-USB-driver-to-the-4.18.20-version.patch
+    fi
 }
 
 function prepare_nonrt() {
